@@ -34,30 +34,65 @@ generateBtn.addEventListener('click', () => {
 });
 
 function generatePassword(length, includeSymbols) {
-    const lowercase = 'abcdefghijklmnopqrstuvwxyz';
-    const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const words = [
+        'mountain', 'river', 'forest', 'ocean', 'sunrise', 'twilight', 'thunder', 'crystal',
+        'phoenix', 'dragon', 'tiger', 'eagle', 'wolf', 'bear', 'solar', 'lunar',
+        'meteor', 'comet', 'galaxy', 'nebula', 'stellar', 'cosmic', 'quantum', 'digital',
+        'shadow', 'flame', 'frost', 'storm', 'thunder', 'lightning', 'eclipse', 'aurora',
+        'zenith', 'nadir', 'vertex', 'nexus', 'synergy', 'harmony', 'velocity', 'infinity'
+    ];
     const numbers = '0123456789';
-    const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    const symbols = '!@#$%^&*';
 
-    let chars = lowercase + uppercase + numbers + (includeSymbols ? symbols : '');
-    let password = [];
+    let password = '';
+    let currentLength = 0;
 
-    // Ensure at least one of each required type
-    password.push(uppercase.charAt(Math.floor(Math.random() * uppercase.length)));
-    password.push(lowercase.charAt(Math.floor(Math.random() * lowercase.length)));
-    password.push(numbers.charAt(Math.floor(Math.random() * numbers.length)));
+    // Add first word with capital letter
+    const word1 = words[Math.floor(Math.random() * words.length)];
+    const word1Capitalized = word1.charAt(0).toUpperCase() + word1.slice(1);
+    password += word1Capitalized;
+    currentLength = password.length;
 
+    // Add a number
+    password += numbers[Math.floor(Math.random() * numbers.length)];
+    currentLength += 1;
+
+    // Add symbol if requested
     if (includeSymbols) {
-        password.push(symbols.charAt(Math.floor(Math.random() * symbols.length)));
+        password += symbols[Math.floor(Math.random() * symbols.length)];
+        currentLength += 1;
     }
 
-    // Fill remaining length with random chars from the full set
-    for (let i = password.length; i < length; i++) {
-        password.push(chars.charAt(Math.floor(Math.random() * chars.length)));
+    // Add more words or adjust to match target length
+    while (currentLength < length) {
+        const word = words[Math.floor(Math.random() * words.length)];
+        const canFitWord = currentLength + word.length <= length;
+
+        if (canFitWord) {
+            password += word;
+            currentLength += word.length;
+
+            // Add number between words if space allows
+            if (currentLength + 1 <= length) {
+                password += numbers[Math.floor(Math.random() * numbers.length)];
+                currentLength += 1;
+            }
+
+            // Add symbol if requested and space allows
+            if (includeSymbols && currentLength + 1 <= length) {
+                password += symbols[Math.floor(Math.random() * symbols.length)];
+                currentLength += 1;
+            }
+        } else {
+            // Fill remaining space with characters from last word
+            const remaining = length - currentLength;
+            password += word.substring(0, remaining);
+            currentLength = length;
+        }
     }
 
-    // Shuffle to randomize positions
-    return password.sort(() => Math.random() - 0.5).join('');
+    return password.substring(0, length);
+}
 }
 
 // Dynamic Evaluation Logic
