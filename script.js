@@ -73,7 +73,7 @@ function generatePassword(length, includeSymbols) {
 
     return password.substring(0, length);
 }
-}
+
 
 // Dynamic Evaluation Logic
 passwordInput.addEventListener('input', () => {
