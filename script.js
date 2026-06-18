@@ -14,6 +14,8 @@ const rules = {
     number: document.getElementById('rule-number'),
     special: document.getElementById('rule-special')
 };
+const lengthSelect = document.getElementById('length-select');
+const generateBtn = document.getElementById('generate-password');
 
 // Password Visibility Toggle Logic
 toggleBtn.addEventListener('click', () => {
@@ -21,6 +23,28 @@ toggleBtn.addEventListener('click', () => {
     passwordInput.setAttribute('type', type);
     visibilityIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
 });
+
+// Password Generator Logic
+generateBtn.addEventListener('click', () => {
+    const length = parseInt(lengthSelect.value, 10);
+    const selectedCharset = document.querySelector('input[name="charset"]:checked');
+    const includeSymbols = selectedCharset?.value === 'symbols';
+    passwordInput.value = generatePassword(length, includeSymbols);
+    passwordInput.dispatchEvent(new Event('input'));
+});
+
+function generatePassword(length, includeSymbols) {
+    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numbers = '0123456789';
+    const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    const chars = letters + numbers + (includeSymbols ? symbols : '');
+
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+}
 
 // Dynamic Evaluation Logic
 passwordInput.addEventListener('input', () => {

@@ -121,19 +121,19 @@
         </nav>
     </header>
 
-    <main class="relative min-h-screen flex items-center justify-center pt-16 px-sm overflow-hidden">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full pointer-events-none"></div>
+    <main class="relative min-h-screen flex items-center justify-center pt-20 px-sm sm:px-md overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-secondary/10 blur-[120px] rounded-full pointer-events-none"></div>
         
-        <section class="w-full max-w-2xl text-center z-10">
-            <h1 class="font-headline-lg text-headline-lg md:text-[48px] md:leading-[56px] text-on-surface mb-md">
+        <section class="w-full max-w-[min(92vw,42rem)] text-center z-10 px-sm sm:px-0">
+            <h1 class="font-headline-lg text-headline-lg sm:text-[32px] sm:leading-[40px] md:text-[48px] md:leading-[56px] text-on-surface mb-md">
                 Strengthen Your Passwords with Vault Guard
             </h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-lg mx-auto">
+            <p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-lg mx-auto text-center sm:text-left">
                 Put your passwords to the test with my advanced checker.
             </p>
             
-            <div class="glass-panel p-md md:p-xl rounded-xl text-left">
+            <div class="glass-panel p-sm sm:p-md md:p-xl rounded-xl text-left">
                 <label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="password-input">Enter Password</label>
                 <div class="relative group">
                     <input class="w-full bg-surface-container-lowest border-0 border-b-2 border-white/10 text-on-surface p-md text-headline-md font-mono-code focus:ring-0 focus:border-primary transition-all rounded-t-lg placeholder:text-outline-variant" id="password-input" placeholder="••••••••••••" type="password">
@@ -171,6 +171,35 @@
                         <span class="material-symbols-outlined text-[20px]" id="rule-special">circle</span>
                         Special Symbols
                     </div>
+                </div>
+
+                <div class="mt-xl grid gap-md text-on-surface-variant font-label-md text-label-md">
+                    <div class="grid gap-2 sm:grid-cols-2 sm:items-end">
+                        <label class="block" for="length-select">Password length</label>
+                        <select id="length-select" class="w-full bg-surface-container-lowest border border-white/10 rounded-lg p-3 text-on-surface focus:border-primary focus:outline-none">
+                            <option value="8">8 characters</option>
+                            <option value="10">10 characters</option>
+                            <option value="16">16 characters</option>
+                        </select>
+                    </div>
+
+                    <div class="grid gap-2">
+                        <span>Character options</span>
+                        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+                            <label class="inline-flex items-center gap-2">
+                                <input type="radio" name="charset" value="alnum" checked class="h-4 w-4 text-primary ring-1 ring-white/20 focus:ring-primary">
+                                Letters &amp; numbers
+                            </label>
+                            <label class="inline-flex items-center gap-2">
+                                <input type="radio" name="charset" value="symbols" class="h-4 w-4 text-primary ring-1 ring-white/20 focus:ring-primary">
+                                Letters, numbers &amp; symbols
+                            </label>
+                        </div>
+                    </div>
+
+                    <button id="generate-password" class="mt-4 w-full bg-primary text-on-primary px-4 py-3 rounded-lg font-label-md text-label-md transition-transform active:scale-95 hover:bg-white/90">
+                        Generate Password
+                    </button>
                 </div>
             </div>
         </section>
