@@ -34,16 +34,30 @@ generateBtn.addEventListener('click', () => {
 });
 
 function generatePassword(length, includeSymbols) {
-    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+    const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const numbers = '0123456789';
     const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
-    const chars = letters + numbers + (includeSymbols ? symbols : '');
 
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    let chars = lowercase + uppercase + numbers + (includeSymbols ? symbols : '');
+    let password = [];
+
+    // Ensure at least one of each required type
+    password.push(uppercase.charAt(Math.floor(Math.random() * uppercase.length)));
+    password.push(lowercase.charAt(Math.floor(Math.random() * lowercase.length)));
+    password.push(numbers.charAt(Math.floor(Math.random() * numbers.length)));
+
+    if (includeSymbols) {
+        password.push(symbols.charAt(Math.floor(Math.random() * symbols.length)));
     }
-    return result;
+
+    // Fill remaining length with random chars from the full set
+    for (let i = password.length; i < length; i++) {
+        password.push(chars.charAt(Math.floor(Math.random() * chars.length)));
+    }
+
+    // Shuffle to randomize positions
+    return password.sort(() => Math.random() - 0.5).join('');
 }
 
 // Dynamic Evaluation Logic
