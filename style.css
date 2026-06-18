@@ -39,8 +39,58 @@ body {
     }
 }
 
+.custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none;
+    padding-right: 1rem;
+}
+
+.custom-select:focus {
+    outline: none;
+}
+
+.select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.select-arrow {
+    color: #ffffff;
+    font-size: 1.4rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.75rem;
+    padding: 0.55rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+}
+
+.select-arrow:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.select-highlight {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(185, 199, 228, 0.2);
+}
+
 .strength-bar-segment {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#character-options {
+    max-height: 500px;
+    overflow: hidden;
+    opacity: 1;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+#character-options.collapsed {
+    max-height: 0;
+    opacity: 0;
 }
 
 .material-symbols-outlined {

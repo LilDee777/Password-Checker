@@ -173,14 +173,17 @@
                     <div class="mt-xl grid gap-md text-on-surface-variant font-label-md text-label-md">
                         <div class="grid gap-2 sm:grid-cols-2 sm:items-end">
                             <label class="block" for="length-select">Password length</label>
-                            <select id="length-select" class="w-full bg-surface-container-lowest border border-white/10 rounded-lg p-3 text-on-surface focus:border-primary focus:outline-none">
-                                <option value="8">8 characters</option>
-                                <option value="10">10 characters</option>
-                                <option value="16">16 characters</option>
-                            </select>
+                            <div class="select-wrapper flex items-center gap-2">
+                                <select id="length-select" class="w-full custom-select bg-surface-container-lowest border border-white/10 rounded-lg p-3 text-on-surface focus:border-primary focus:outline-none">
+                                    <option value="8">8 characters</option>
+                                    <option value="10">10 characters</option>
+                                    <option value="16">16 characters</option>
+                                </select>
+                                <button id="length-arrow" type="button" class="material-symbols-outlined select-arrow" aria-label="Open password length options">arrow_drop_down</button>
+                            </div>
                         </div>
 
-                        <div class="grid gap-2">
+                        <div id="character-options" class="grid gap-2">
                             <span>Character options</span>
                             <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
                                 <label class="inline-flex items-center gap-2">

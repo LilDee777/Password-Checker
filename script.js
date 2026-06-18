@@ -15,6 +15,7 @@ const rules = {
     special: document.getElementById('rule-special')
 };
 const lengthSelect = document.getElementById('length-select');
+const lengthArrow = document.getElementById('length-arrow');
 const generateBtn = document.getElementById('generate-password');
 
 // Password Visibility Toggle Logic
@@ -22,6 +23,19 @@ toggleBtn.addEventListener('click', () => {
     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
     passwordInput.setAttribute('type', type);
     visibilityIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+});
+
+lengthArrow.addEventListener('click', () => {
+    lengthSelect.focus();
+    if (typeof lengthSelect.showPicker === 'function') {
+        lengthSelect.showPicker();
+    } else {
+        lengthSelect.click();
+    }
+    lengthSelect.classList.add('select-highlight');
+    setTimeout(() => {
+        lengthSelect.classList.remove('select-highlight');
+    }, 1200);
 });
 
 // Password Generator Logic
